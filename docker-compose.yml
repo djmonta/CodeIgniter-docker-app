@@ -1,33 +1,15 @@
 version: '2.3'
 services:
-  nginx:
-    image: nginx:1.13.7
-    container_name: lemp-nginx
+  nginx-phpfpm:
+    image: richarvey/nginx-php-fpm:latest
+    container_name: lemp-nginx-phpfpm
+    restart: always
     ports:
       - "80:80"
     volumes:
-      - ./nginx/conf/:/etc/nginx/:ro
-      - ./nginx/site/:/usr/share/nginx/html/
-      - ./nginx/log/:/var/log/nginx/
-    depends_on:
-      - phpfpm
+      - ./src/:/var/www/html
     networks:
-      lemp-network:
-        ipv4_address: ${LEMP_NGINX}
-
-  phpfpm:
-    image: blacksource/php7-fpm
-    container_name: lemp-phpfpm
-    expose: 
-      - "9000"
-    volumes:
-      - ./phpfpm/conf/fpm/php.ini:/etc/php/7.0/fpm/php.ini
-      - ./phpfpm/conf/fpm/php-fpm.conf:/etc/php/7.0/fpm/php-fpm.conf
-      - ./phpfpm/conf/cli/php.ini:/etc/php/7.0/cli/php.ini
-      - ./nginx/site/:/usr/share/nginx/html
-    networks:
-      lemp-network:
-        ipv4_address: ${LEMP_PHPFPM}
+      - lemp-network
 
   mysql-data:
     image: busybox
@@ -36,7 +18,7 @@ services:
       - ./mysql/storage:/var/lib/mysql
 
   mysql:
-    image: mysql:5.7.20
+    image: mysql:latest
     container_name: lemp-mysql
     ports:
       - "3306:3306"
@@ -45,17 +27,12 @@ services:
     volumes: 
       - ./mysql/conf/:/etc/mysql/conf.d
       - ./mysql/log/:/var/log/mysql
+      - ./mysql/storage:/var/lib/mysql
     environment: 
-      MYSQL_ROOT_PASSWORD: asdf 
+      MYSQL_ROOT_PASSWORD: asdf
     networks:
-      lemp-network:
-        ipv4_address: ${LEMP_MYSQL}
+      - lemp-network
 
 networks:
   lemp-network:
     driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: ${LEMP_SUBNET}
-          gateway: ${LEMP_GATEWAY}

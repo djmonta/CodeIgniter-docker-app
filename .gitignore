@@ -1,5 +1,5 @@
 nginx/log/
-
+nginx/site/CodeIgniter/application/tests/_ci_phpunit_test/*
 
 mysql/log
 mysql/storage
