@@ -3,6 +3,10 @@ services:
   nginx-phpfpm:
     image: richarvey/nginx-php-fpm:latest
     container_name: lemp-nginx-phpfpm
+    depends_on:
+      - mysql
+    links:
+      - mysql
     restart: always
     ports:
       - "80:80"
@@ -11,23 +15,11 @@ services:
     networks:
       - lemp-network
 
-  mysql-data:
-    image: busybox
-    container_name: lemp-mysql-data
-    volumes:
-      - ./mysql/storage:/var/lib/mysql
-
   mysql:
-    image: mysql:latest
+    image: mysql:5.7
     container_name: lemp-mysql
     ports:
       - "3306:3306"
-    volumes_from:
-      - mysql-data
-    volumes: 
-      - ./mysql/conf/:/etc/mysql/conf.d
-      - ./mysql/log/:/var/log/mysql
-      - ./mysql/storage:/var/lib/mysql
     environment: 
       MYSQL_ROOT_PASSWORD: asdf
     networks:
