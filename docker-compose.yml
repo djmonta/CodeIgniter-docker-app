@@ -1,8 +1,12 @@
 version: '2.3'
 services:
   nginx-phpfpm:
-    image: richarvey/nginx-php-fpm:latest
+    build: ./nginx-php-fpm
     container_name: lemp-nginx-phpfpm
+    environment: 
+      - ENABLE_XDEBUG=1
+      - XDEBUG_CONFIG=remote_host=192.168.3.18
+      - PHP_IDE_CONFIG=serverName=docker
     depends_on:
       - mysql
     links:
