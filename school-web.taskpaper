@@ -1,0 +1,68 @@
+授業時数別のページにもCSVダウンロード #100:
+	- 内容
+	- ダウンロードボタン表示
+	- periodプルダウン表示
+	- controller整理
+
+school_yearテーブルの用意 #75:
+	- 出欠管理で間に合ってないところを直す
+
+school_sourceテーブルの用意 #107:
+	- テーブルを用意
+	- homeroomsテーブルにcource_idのカラムを追加
+	- 帳票出力部分の修正
+
+科目別ページにperiodの検索を設置する #70:
+	- masterからブランチ
+先生の権限 #49:
+	- SQL カラムを増やす
+	- ログインセッションに入れる
+先生の並び順 #42:
+	- SQL カラムを増やす
+科目別ページ ステータス詳細を表示 #69:
+	- 数字 % の色を付ける
+	- 日付指定範囲の検索ボタンつける
+	- マウスオーバーでツールチップ @due(2018-07-09)
+自分の学校以外アクセスできなくする #58:
+	- ページ一覧をもらう @today @done
+	- controller からログイン情報を参照してリダイレクト @done
+	- 優先度高め @due(2017-07-03) @done
+	- class_times_id 直す @done
+	- getStudent の修正 @done
+他の学校でも利用できるか？ #25:
+	- 確認する @done
+科目別ページ #44:
+	- Viewを作る、attendanceHomeroomsSubjects.php @done
+	- Homeroom 出欠情報を追加 @done
+	- ループの修正 @done
+	- CSS修正 @done
+日付指定機能 #59:
+	- GETリクエスト処理 @done
+	- Presence_m に日付指定して出欠情報を取得する関数を追加 @done
+		- $date_from = null, $date_to =null @done
+	- Viewに日付を限定する表示を付ける @done
+CSVダウンロード #60:
+	- 行: クラスの生徒
+	- 列: 授業科目（group）+ Homeroom
+	- 内容: 出席数、出席率 確認してもらう
+授業時数別に日付指定 #45:
+	- fromを指定したら、先頭のデータが変わる
+	- ページングの時は、データを渡す
+	- 一番右の列の内容は変わらない
+
+Welcome:
+	- TaskPaper knows about projects, tasks, notes, and tags.
+	- It auto-formats these items so that your lists are easier to read.
+	- Delete this text when you are ready to start your own lists.
+To Create Items:
+	- To create a task, type a dash followed by a space.
+	- To create a project, type a line ending with a colon.
+	- To create a tag, type '@' followed by the tag’s name.
+To Organize Items:
+	- To indent items press the Tab key.
+	- To un-indent items press Shift-Tab.
+	- To mark a task done click leading dash.
+To Fold, Focus, and Filter Items:
+	- To fold/unfold an item click the dot to the left of the item.
+	- To focus on a single project select it in the sidebar.
+	- To filter your list enter a search in the toolbar search field.

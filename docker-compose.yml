@@ -1,12 +1,11 @@
 version: '2.3'
 services:
-  nginx-phpfpm:
-    build: ./nginx-php-fpm
-    container_name: lemp-nginx-phpfpm
-    environment: 
-      - ENABLE_XDEBUG=1
-      - XDEBUG_CONFIG=remote_host=192.168.3.18
-      - PHP_IDE_CONFIG=serverName=docker
+  apache-phpfpm:
+    image: webdevops/php-apache:centos-7-php56
+    container_name: apache-phpfpm
+    environment:
+      - WEB_DOCUMENT_ROOT=/var/www/html
+      - PHP_DATE_TIMEZONE="Asia/Tokyo"
     depends_on:
       - mysql
     links:
@@ -20,12 +19,18 @@ services:
       - lemp-network
 
   mysql:
-    image: mysql:5.7
-    container_name: lemp-mysql
+    image: mysql:5.6
+    container_name: mysql
     ports:
       - "3306:3306"
     environment: 
-      MYSQL_ROOT_PASSWORD: asdf
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_USER: school_dev
+      MYSQL_PASSWORD: school_dev
+      MYSQL_DATABASE: school_dev
+    volumes:
+      - ./mysql/init/:/docker-entrypoint-initdb.d
+    restart: always
     networks:
       - lemp-network
 
