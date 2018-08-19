@@ -1,11 +1,12 @@
 version: '2.3'
 services:
   apache-phpfpm:
-    image: webdevops/php-apache:centos-7-php56
+    image: webdevops/php-apache-dev:centos-7-php56
     container_name: apache-phpfpm
     environment:
       - WEB_DOCUMENT_ROOT=/var/www/html
       - PHP_DATE_TIMEZONE="Asia/Tokyo"
+      - PHP_DEBUGGER=xdebug
     depends_on:
       - mysql
     links:
@@ -15,6 +16,7 @@ services:
       - "80:80"
     volumes:
       - ./src/:/var/www/html
+      - ./php-conf/php.ini:/opt/docker/etc/php/php.ini
     networks:
       - lemp-network
 
