@@ -1,15 +1,13 @@
 version: '2.3'
 services:
-  apache-phpfpm:
-    image: webdevops/php-apache-dev:centos-7-php56
-    container_name: apache-phpfpm
+  apache:
+    image: webdevops/php-apache:centos-7-php56
+    container_name: apache-php
     environment:
       - WEB_DOCUMENT_ROOT=/var/www/html
       - PHP_DATE_TIMEZONE="Asia/Tokyo"
       - PHP_DEBUGGER=xdebug
     depends_on:
-      - mysql
-    links:
       - mysql
     restart: always
     ports:
@@ -17,11 +15,13 @@ services:
     volumes:
       - ./src/:/var/www/html
       - ./php-conf/php.ini:/opt/docker/etc/php/php.ini
+      - ./httpd:/opt/docker/etc/httpd/vhost.common.d
     networks:
       - lemp-network
 
   mysql:
     image: mysql:5.6
+    # command: --character-set-server=utf8mb4 --default-character-set=utf8mb4
     container_name: mysql
     ports:
       - "3306:3306"
@@ -32,6 +32,7 @@ services:
       MYSQL_DATABASE: school_dev
     volumes:
       - ./mysql/init/:/docker-entrypoint-initdb.d
+      # - ./mysql/var:/var/lib/mysql
     restart: always
     networks:
       - lemp-network
