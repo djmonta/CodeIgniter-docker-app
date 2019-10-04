@@ -9,6 +9,7 @@ services:
       - PHP_DEBUGGER=xdebug
     depends_on:
       - mysql
+      - mailhog
     restart: always
     ports:
       - "80:80"
@@ -36,6 +37,16 @@ services:
     restart: always
     networks:
       - lemp-network
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: mailhog
+    ports:
+     - "1025:1025"
+     - "8025:8025"
+    restart: always
+    networks:
+     - lemp-network
 
 networks:
   lemp-network:
