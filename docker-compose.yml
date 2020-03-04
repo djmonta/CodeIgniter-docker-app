@@ -35,7 +35,7 @@ services:
     ports:
       - "3306:3306"
     environment: 
-      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: school_dev
       MYSQL_PASSWORD: school_dev
       MYSQL_DATABASE: school_dev
