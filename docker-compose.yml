@@ -22,7 +22,7 @@ services:
       - "80:80"
     volumes:
       - ./src/:/var/www/html
-      - ./php-conf/20-php-custom.sh:/opt/docker/provision/entrypoint.d/10-php-custom.sh
+      - ./php-conf/20-php-custom.sh:/opt/docker/provision/bootstrap.d/30-php-custom.sh
       - ./php-conf/php.ini:/opt/docker/etc/php/php.ini
       - ./httpd:/opt/docker/etc/httpd/vhost.common.d
     networks:
