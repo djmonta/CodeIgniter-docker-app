@@ -1,0 +1,20 @@
+services:
+  mysql8:
+    image: mysql:8.0
+    container_name: mysql8
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - ./conf.d:/etc/mysql/conf.d
+      - db-store:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: school_dev
+      MYSQL_PASSWORD: school_dev
+      MYSQL_DATABASE: school_dev
+#    restart: always
+
+volumes:
+  db-store:
+    driver: local
