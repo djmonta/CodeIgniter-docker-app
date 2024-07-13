@@ -13,7 +13,7 @@ services:
       MYSQL_USER: school_dev
       MYSQL_PASSWORD: school_dev
       MYSQL_DATABASE: school_dev
-#    restart: always
+    restart: always
 
 volumes:
   db-store:

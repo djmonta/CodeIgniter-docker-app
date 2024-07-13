@@ -21,7 +21,7 @@ RUN echo "error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT" >> /usr/local/etc
 RUN echo "log_errors = On" >> /usr/local/etc/php/conf.d/error.ini
 COPY apache-php/docker-php.conf /etc/apache2/conf-available/docker-php.conf
 RUN a2enmod rewrite && \
-	a2enmod headers
+        a2enmod headers
 
 RUN apt-get update && apt-get install -y wget libxrender1 libfontconfig1 libx11-dev libjpeg62-turbo libxtst6 fontconfig xfonts-75dpi xfonts-base libzip-dev zip
 RUN docker-php-ext-install zip
@@ -30,7 +30,7 @@ RUN docker-php-ext-enable xdebug
 
 # wkhtmltopdf
 RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.bookworm_arm64.deb && \
-	dpkg -i wkhtmltox_0.12.6.1-3.bookworm_arm64.deb
+        dpkg -i wkhtmltox_0.12.6.1-3.bookworm_arm64.deb
 
 COPY src/assets/fonts/notoserifjp/NotoSerifJP-Light.otf /usr/share/fonts/
 COPY src/assets/fonts/notoserifjp/NotoSerifJP-SemiBold.otf /usr/share/fonts/
