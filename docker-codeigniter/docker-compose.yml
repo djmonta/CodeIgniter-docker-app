@@ -1,0 +1,37 @@
+services:
+  apache:
+    build: .
+    container_name: php81
+    ports:
+      - "80:80"
+    volumes:
+      - "$PWD/src:/var/www/html"
+      - "$PWD/apache-php/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
+    restart: unless-stopped
+    networks:
+      - lemp-network
+
+  apache-erp:
+    build: .
+    container_name: php81-erp
+    ports:
+      - "8080:80"
+    volumes:
+      - "$PWD/src:/var/www/html"
+    restart: unless-stopped
+    networks:
+      - lemp-network
+
+  # mailhog:
+  #   image: mailhog/mailhog:latest
+  #   container_name: mailhog2
+  #   ports:
+  #    - "1025:1025"
+  #    - "8025:8025"
+  #   restart: always
+  #   networks:
+  #    - lemp-network
+
+networks:
+  lemp-network:
+    driver: bridge

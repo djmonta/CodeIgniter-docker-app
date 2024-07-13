@@ -1,4 +1,1 @@
-sql/*
-src/*.*
-mysql/var
-/export
+/docker-codeigniter/src
